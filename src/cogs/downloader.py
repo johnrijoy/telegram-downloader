@@ -198,10 +198,14 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         download_duration = DownloadingFile.convert_duration(
             download_complete_time - start_time
         )
+
+        logger.info("File downloaded: " + new_file.file_path)
+
         file_path = new_file.file_path.split("/")[-1]
+        rel_file_path = "/".join(new_file.file_path.split("/")[-2:])
 
         # Rename the file to the original file name
-        current_file_path = f"{BOT_API_DIR}{TOKEN_SUB_DIR}/documents/{file_path}"
+        current_file_path = f"{BOT_API_DIR}{TOKEN_SUB_DIR}/{rel_file_path}"
         move_to_path = f"{DOWNLOAD_TO_DIR}{file_name}"
 
         # Make DOWNLOAD_TO_DIR if it doesn't exist
