@@ -12,7 +12,7 @@ services:
         restart: unless-stopped
 
     bot:
-        image: ghcr.io/avibn/telegram-downloader:main
+        image: ghcr.io/johnrijoy/telegram-downloader:main
         environment:
             LOCAL_BOT_API_URL: "http://telegram-bot-api:8081"
             BOT_API_DIR: "/var/lib/telegram-bot-api/"
