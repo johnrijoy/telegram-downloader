@@ -179,13 +179,17 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 video.file_id, read_timeout=1000
             )
         except Exception as e:
-            await message.reply_text(
-                (
-                    f"⛔ Error downloading file.\n\n"
+            downloading_files.pop(video.file_id)
+
+            msg = (
+                    f"⛔ Error downloading file\n\n"
                     f"> 📄 *File name:*   `{downloading_file.file_name}`\n"
                     f"> 💾 *File size:*   `{downloading_file.file_size_mb}`\n"
                     f"Error: ```{e}```"
-                ),
+                ).replace(".", "\.")
+
+            await message.reply_text(
+                msg,
                 parse_mode="MarkdownV2",
             )
             return
